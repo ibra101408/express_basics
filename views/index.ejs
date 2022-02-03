@@ -1,7 +1,14 @@
 
 <h1>Questions about express</h1>
 <% question.forEach((question) => { %>
+    <% if (question['user'].toLocaleLowerCase() === 'kadi'){%>
     <h2><%= question['title']%></h2>
     <p><%= question['user']%></p>
     <p><%= question['votes'] %></p>
-<% });%>
+<% } else { %>
+        <h1>Asked by other user:</h1>
+        <h2><%= question['title']%></h2>
+        <p><%= question['user']%></p>
+        <p><%= question['votes'] %></p>
+<%}%>
+<%});%>
