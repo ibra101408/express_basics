@@ -1,6 +1,18 @@
 let express = require('express');
 const app = express();
 
+app.get('/user/:username', (req, res)=>{
+    let user = req.params.username;
+    res.render('index.ejs', {username : user});
+});
+
+app.listen(3000, ()=> {
+    console.log('Server started on http://localhost:3000');
+});
+/*
+app.get('/demo',(req, res)=>{
+    res.render('index.ejs');
+});
 app.get('/', (req, res) => {
     res.send('<a href="/contact"> Contact us</a> <br> <a href="/about">About us</a>');
 });
@@ -19,4 +31,4 @@ app.get('*', (req, res) => {
 
 app.listen(3000, ()=> {
     console.log('Server started on http://localhost:3000');
-})
+})*/
