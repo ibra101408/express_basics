@@ -2,9 +2,34 @@ let express = require('express');
 const app = express();
 const path = require('path');
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended:true}));
+
 app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.get('/login', (req, res) =>{
+    res.render('login');
+})
+
+app.post('/login', (req, res) =>{
+   let username = req.body.username;
+   let password = req.body.password;
+
+   if (username === 'user' && password === 'qwerty'){
+       res.redirect('/dashboard');
+   }
+});
+
+app.get('/dashboard', (req, res) =>{
+    res.render('dashboard');
+})
+
+app.listen(3000, ()=> {
+    console.log('Server started on http://localhost:3000')
+})
+/*
 
 app.get('/questions', (req, res) =>{
     let questions = [
@@ -13,12 +38,6 @@ app.get('/questions', (req, res) =>{
     ]
     res.render('index', {question:questions})
 })
-
-app.listen(3000, ()=> {
-    console.log('Server started on http://localhost:3000')
-})
-/*
-
 app.get('/user/:username', (req, res)=>{
     let user = req.params.username;
     res.render('index.ejs', {username : user});
